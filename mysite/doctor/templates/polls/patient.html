@@ -1,0 +1,49 @@
+{% extends 'polls/index.html' %}
+
+
+{% block patient_form %}
+
+<div class="row">
+    <div class="col-sm-3"></div>
+  <div class="col-sm-6">
+
+    <div class="container">
+  <h2>病人信息</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>姓名</th>
+        <th>病人编号</th>
+        <th>性别</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for patient in all_patients %}
+      <tr>
+        <td>{{ patient.p_name }} </td>
+        <td>{{ patient.p_number }}</td>
+        <td>{{ patient.p_sex }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+
+      <center>
+          <div class="btn-group">
+  <button type="button" class="btn btn-primary btn-lg"  onclick='location.href="http://localhost:8000/doctor/patient_log"'>录入</button>
+  <button type="button" class="btn btn-primary btn-lg" onclick='location.href="http://localhost:8000/doctor/patient_num"'>编辑</button>
+  <button type="button" class="btn btn-primary btn-lg" onclick='location.href="http://localhost:8000/doctor/patient_search"'>查询</button>
+    </div>
+      </center>
+
+  </div>
+  <div class="col-sm-3"></div>
+</div>
+
+{% endblock %}

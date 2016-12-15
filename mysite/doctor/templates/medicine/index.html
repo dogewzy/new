@@ -1,0 +1,49 @@
+{% extends 'polls/index.html' %}
+
+
+{% block register_form %}
+<div class="row">
+    <div class="col-sm-1"></div>
+  <div class="col-sm-6">
+
+    <div class="container">
+  <h2>药品信息</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>药品编号</th>
+        <th>药品名称</th>
+        <th>药品价格</th>
+         <th>计价单位</th>
+          <th>药品分类</th>
+        <th>剩余总量</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for m in all_medicine %}
+      <tr>
+        <td>{{ m.number }} </td>
+        <td>{{ m.name }}</td>
+        <td>{{ m.price }}</td>
+         <td>{{ m.unit }}</td>
+          <td>{{ m.sort }}</td>
+        {% if m.amount > 10 %}
+        <td>{{ m.amount }}</td>
+        {% else %}
+        <td>{{ m.amount }}  提醒：余量较少</td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="btn-group">
+  <button type="button" class="btn btn-primary btn-lg"  onclick='location.href="http://localhost:8000/doctor/medicine_add"'>添加药品</button>
+  <button type="button" class="btn btn-primary btn-lg" onclick='location.href="http://localhost:8000/doctor/medicine_num"'>修改余量</button>
+
+    </div>
+</div>
+  </div>
+  <div class="col-sm-3"></div>
+</div>
+
+{% endblock %}

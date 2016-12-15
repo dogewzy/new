@@ -1,0 +1,47 @@
+{% extends 'polls/index.html' %}
+
+{% block patient_form %}
+
+
+
+<h3>划价信息</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>挂号编号</th>
+        <th>病人编号</th>
+        <th>总费用</th>
+          <th>操作人</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+          <td>{{ num }} </td>
+          <td>{{ p_num }}</td>
+          <td>{{ total_cost }}</td>
+          <td>{{ man }}</td>
+      </tr>
+    </tbody>
+  </table>
+<h3>药品明细</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>药品名称</th>
+        <th>药品数量</th>
+        <th>单价</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for medicine in li %}
+      <tr>
+
+          <td>{{ medicine.0 }} </td>
+          <td>{{ medicine.1 }}</td>
+          <td>{{ medicine.2 }}</td>
+
+      </tr>
+     {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

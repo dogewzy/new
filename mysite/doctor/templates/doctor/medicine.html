@@ -1,0 +1,55 @@
+{% extends 'polls/index.html' %}
+
+{% block patient_form %}
+
+
+
+
+<form action="http://localhost:8000/doctor/medicine_information/" method="post">
+    {% csrf_token %}
+    {{ addform }}
+    <input type="hidden" value='{{ number }}'  name="number">
+    <input type="submit" value="添加药品" />
+    <p id="amount"></p>
+</form>
+<h3>已添加的药品</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>药品名称</th>
+        <th>药品数量</th>
+        <th>单价</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for medicine in all_m %}
+      <tr>
+
+          <td>{{ medicine.0 }} </td>
+          <td>{{ medicine.1 }}</td>
+          <td>{{ medicine.2 }}</td>
+
+      </tr>
+     {% endfor %}
+    </tbody>
+  </table>
+<form action="http://localhost:8000/doctor/result/" method="post">
+    {% csrf_token %}
+    <input type="hidden" value='{{ number }}'  name="number">
+    <input type="submit" value="确定处方" />
+</form>
+<script>
+    var info = {{ info|safe }};
+    var input = document.getElementById('id_数量');
+	input.onfocus = function(){
+		var name = document.getElementById('id_药品名称').value;
+		var amount = document.getElementById('amount');
+		var num = info[name];
+		if(num < 10){
+
+		    amount.innerHTML = '余量为'+num
+		}
+	}
+</script>
+
+{% endblock %}

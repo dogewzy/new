@@ -1,0 +1,13 @@
+{% extends 'polls/index.html' %}
+
+
+{% block register_form %}
+
+
+<form action="http://localhost:8000/doctor/r_index/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="确定" />
+</form>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'polls/index.html' %}
+
+{% block patient_form %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>病情</th>
+        <th>处方</th>
+        <th>时间</th>
+
+      </tr>
+    </thead>
+    <tbody>
+
+    {% for r in record %}
+      <tr>
+          <td>{{ r.0 }} </td>
+          <td>{{ r.1 }}</td>
+          <td>{{ r.2 }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

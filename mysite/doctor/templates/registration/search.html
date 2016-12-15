@@ -1,0 +1,11 @@
+{% extends 'polls/index.html' %}
+
+{% block patient_form %}
+<h3>挂号信息查询</h3>
+<form action="http://localhost:8000/doctor/r_search/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="查询此挂号编号的信息" />
+</form>
+
+{% endblock %}

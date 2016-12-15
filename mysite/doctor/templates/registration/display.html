@@ -1,0 +1,28 @@
+{% extends 'polls/index.html' %}
+
+
+{% block register_form %}
+<table class="table">
+    <thead>
+      <tr>
+        <th>挂号编号</th>
+        <th>病人姓名</th>
+        <th>科室</th>
+          <th>费用</th>
+          <th>操作人</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+          <td>{{ ob.register_num }} </td>
+          <td>{{ ob.name }}</td>
+          <td>{{ ob.section }}</td>
+          <td>{{ ob.cost }}</td>
+          <td>{{ ob.operator}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+{% endblock %}

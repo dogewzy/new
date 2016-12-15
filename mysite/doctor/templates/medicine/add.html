@@ -1,0 +1,12 @@
+{% extends 'polls/index.html' %}
+
+
+{% block medicine_form %}
+<form action="http://localhost:8000/doctor/medicine_add/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="添加药品" />
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'polls/index.html' %}
+
+{% block patient_form %}
+<h3>病人信息录入</h3>
+<form action="http://localhost:8000/doctor/patient_log/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="添加" />
+</form>
+
+{% if  isok  %}
+    <p>添加成功！您可以继续添加</p>
+{% endif %}
+{% endblock %}

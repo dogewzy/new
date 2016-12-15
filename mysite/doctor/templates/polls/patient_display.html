@@ -1,0 +1,39 @@
+{% extends 'polls/index.html' %}
+
+{% block patient_form %}
+
+
+
+
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>姓名</th>
+        <th>病人编号</th>
+        <th>性别</th>
+          <th>电话号码</th>
+          <th>年龄</th>
+          <th>住址</th>
+          <th>婚姻情况</th>
+          <th>证件号码</th>
+          <th>以往病历</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+          <td>{{ patient.p_name }} </td>
+          <td>{{ patient.p_number }}</td>
+          <td>{{ patient.p_sex }}</td>
+          <td>{{ patient.p_tel_number }}</td>
+          <td>{{ patient.p_age}}</td>
+          <td>{{ patient.p_address}}</td>
+          <td>{{ patient.p_marriage}}</td>
+          <td>{{ patient.p_id_num }}</td>
+          <td><a href="http://localhost:8000/doctor/diag_record/{{ patient.p_number }}/">点击查看</a></td>
+
+
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}

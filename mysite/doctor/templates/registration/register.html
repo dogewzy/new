@@ -1,0 +1,36 @@
+{% extends 'polls/index.html' %}
+
+
+{% block register_form %}
+
+<h3>挂号情况总览</h3>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th>挂号编号</th>
+        <th>病人姓名</th>
+        <th>科室</th>
+          <th>费用</th>
+          <th>操作人</th>
+
+      </tr>
+    </thead>
+    <tbody>
+    {% for ob in obs %}
+      <tr>
+          <td>{{ ob.register_num }} </td>
+          <td>{{ ob.name }}</td>
+          <td>{{ ob.section }}</td>
+          <td>{{ ob.cost }}</td>
+          <td>{{ ob.operator}}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+<button type="button" class="btn btn-primary btn-lg"  onclick='location.href="http://localhost:8000/doctor/r_index"'>为病人挂号</button>
+  <button type="button" class="btn btn-primary btn-lg" onclick='location.href="http://localhost:8000/doctor/r_search"'>查询挂号信息</button>
+
+
+
+{% endblock %}

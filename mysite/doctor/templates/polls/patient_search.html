@@ -1,0 +1,11 @@
+{% extends 'polls/index.html' %}
+
+{% block patient_form %}
+
+<h3>给出需要检索的病人编号</h3>
+<form action="http://localhost:8000/doctor/patient_search/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="查询此病人" />
+</form>
+{% endblock %}
