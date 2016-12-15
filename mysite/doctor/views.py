@@ -10,11 +10,11 @@ from django.contrib.auth import logout as auth_logout
 login_url = "http://localhost:8000/doctor/login/"
 
 
+# 这个还没用到
 @permission_required(perm='price.add_price',
                      login_url=login_url)
 def entry_index(request):
     # 提供查询入口
-
     return render(request, 'doctor/index.html')
 
 
@@ -64,6 +64,8 @@ def result(request):
     return render(request, 'doctor/result.html')
 
 
+@permission_required(perm='price.add_price',
+                     login_url=login_url)
 def display(request):
 
     '''药房根据挂号编号开药'''
@@ -97,24 +99,25 @@ def display(request):
         return render(request, 'doctor/search.html', {'form': form})
 
 
+@permission_required(perm='diagnose.add_diagnose',
+                     login_url=login_url)
 def diagnose(request):
     form = DiagnoseForm()
     return render(request, 'doctor/diagnose.html', {'form': form})
 
 
 def diag_record(request, p_num):
-    d = Diagnose.objects.filter(p_id=p_num)
+    d = Diagnose.objects.filter(p_number=p_num)
     r = []
     for each_diagnose in d:
         r.append((each_diagnose.result, each_diagnose.prescription, each_diagnose.time))
-    return render(request, 'doctor/record.html', {'record': r})
+    return render(request, 'doctor/diag_record.html', {'record': r})
 
 
 def index(request):
     return render(request, 'polls/index.html')
 
 
-# @permission_required(perm='polls.add_patient', login_url=login_url)
 def patient(request):
     all_patients = Patient.objects.order_by('id')
     return render(request, 'polls/patient.html', {'all_patients': all_patients})
@@ -211,6 +214,8 @@ def price(request):
     pass
 
 
+@permission_required(perm='medicine.add_medicine',
+                     login_url=login_url)
 def medicine(request):
     all_medicine = Medicine.objects.order_by('id')
     return render(request, 'medicine/index.html', {'all_medicine': all_medicine})
