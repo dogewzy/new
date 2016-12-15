@@ -46,8 +46,8 @@ class EditForm(forms.Form):
 
 class EditToBeSaveForm(forms.Form):
     sex_choice = (
-        ('male', '男'),
-        ('female', '女'),
+        ('男', '男'),
+        ('女', '女'),
     )
     病人编号 = forms.IntegerField(label='你要修改的病人编号')
     姓名 = forms.CharField(max_length=100)
