@@ -11,7 +11,7 @@ login_url = "http://localhost:8000/doctor/login/"
 
 
 # 这个还没用到
-@permission_required(perm='price.add_price',
+@permission_required(perm='doctor.add_price',
                      login_url=login_url)
 def entry_index(request):
     # 提供查询入口
@@ -99,7 +99,7 @@ def display(request):
         return render(request, 'doctor/search.html', {'form': form})
 
 
-@permission_required(perm='diagnose.add_diagnose',
+@permission_required(perm='doctor.add_diagnose',
                      login_url=login_url)
 def diagnose(request):
     form = DiagnoseForm()
@@ -214,7 +214,7 @@ def price(request):
     pass
 
 
-@permission_required(perm='medicine.add_medicine',
+@permission_required(perm='doctor.add_medicine',
                      login_url=login_url)
 def medicine(request):
     all_medicine = Medicine.objects.order_by('id')
@@ -254,6 +254,8 @@ def medicine_num(request):
 
 
 # 下面这部分是挂号的views
+@permission_required(perm='doctor.add_register',
+                     login_url=login_url)
 def register(request):
     obs = Register.objects.all()[0:5]
     return render(request, 'registration/register.html', {'obs': obs})
