@@ -64,7 +64,7 @@ def result(request):
     return render(request, 'doctor/result.html')
 
 
-@permission_required(perm='price.add_price',
+@permission_required(perm='doctor.add_price',
                      login_url=login_url)
 def display(request):
 
