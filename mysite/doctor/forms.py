@@ -75,7 +75,7 @@ class DiagnoseForm(forms.Form):
     挂号编号 = forms.IntegerField()
     诊断结果 = forms.CharField(widget=forms.Textarea)
     诊断时间 = forms.DateTimeField(initial=datetime.datetime.today())
-    操作人 = forms.CharField()
+    操作人 = forms.CharField(initial='孟医生')
 
 
 class RegisterForm(forms.Form):
