@@ -8,7 +8,12 @@ from django.contrib.auth import logout as auth_logout
 
 
 login_url = "http://localhost:8000/doctor/login/"
-
+name_dic = {
+    'doctor': '孟医生',
+    'dogewzy': '管理员',
+    'guahao': '挂号员小李',
+    'yaofang': '药房小刘',
+}
 
 # 这个还没用到
 @permission_required(perm='doctor.add_price',
@@ -103,7 +108,8 @@ def display(request):
                      login_url=login_url)
 def diagnose(request):
     form = DiagnoseForm()
-    return render(request, 'doctor/diagnose.html', {'form': form})
+    name = name_dic[request.user.username]
+    return render(request, 'doctor/diagnose.html', {'form': form, 'name': name})
 
 
 def diag_record(request, p_num):
@@ -288,7 +294,8 @@ def r_index(request):
             return render(request, 'registration/register.html', {'obs': obs})
     else:
         form = RegisterForm()
-        return render(request, 'registration/index.html', {'form': form})
+        name = name_dic[request.user.username]
+        return render(request, 'registration/index.html', {'form': form, 'name':name})
 
 
 def r_display(request):

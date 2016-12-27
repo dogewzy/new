@@ -10,4 +10,11 @@
     <input type="submit" value="确定" />
 </form>
 
+<script>
+    var name = '{{ name|safe }}';
+    var element=document.getElementById("login");
+    element.innerHTML =  "<a href='http://localhost:8000/用户权限'><span >"+name+"</span></a>";
+    var man = document.getElementById("id_操作人");
+    man.value = name;
+</script>
 {% endblock %}
