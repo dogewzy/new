@@ -114,7 +114,9 @@ def display(request):
 def diagnose(request):
     form = DiagnoseForm()
     name = name_dic[request.user.username]
-    return render(request, 'doctor/diagnose.html', {'form': form, 'name': name})
+
+    return render(request, 'doctor/diagnose.html', {'form': form, 'name': name,
+                                                    })
 
 
 def diag_record(request, p_num):
@@ -300,7 +302,11 @@ def r_index(request):
     else:
         form = RegisterForm()
         name = name_dic[request.user.username]
-        return render(request, 'registration/index.html', {'form': form, 'name':name})
+        from django.db.models import Max
+        num = Diagnose.objects.aggregate(Max('register_num'))
+        num = num['register_num__max'] + 1
+        return render(request, 'registration/index.html', {'form': form, 'name': name,
+                                                           'num': num})
 
 
 def r_display(request):

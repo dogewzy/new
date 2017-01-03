@@ -11,10 +11,14 @@
 </form>
 
 <script>
+
     var name = '{{ name|safe }}';
     var element=document.getElementById("login");
     element.innerHTML =  "<a href='http://localhost:8000/用户权限'><span >"+name+"</span></a>";
     var man = document.getElementById("id_操作人");
     man.value = name;
+    var num = '{{ num|safe }}';
+    var insert_num_input = document.getElementById("id_挂号编号");
+    insert_num_input.value = num
 </script>
 {% endblock %}
