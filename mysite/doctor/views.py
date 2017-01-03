@@ -39,7 +39,12 @@ def main_information(request):
             new.prescription = ''
             new.save()
             addform = AddForm()
-            return render(request, 'doctor/medicine.html', {'number': new.register_num, 'addform': addform})
+            m = Medicine.objects.all()
+            info = {}
+            for i in m:
+                info[i.name] = i.amount
+            return render(request, 'doctor/medicine.html', {'number': new.register_num, 'addform': addform,
+                                                            'info': info})
 
 
 def medicine_information(request):
@@ -303,7 +308,7 @@ def r_index(request):
         form = RegisterForm()
         name = name_dic[request.user.username]
         from django.db.models import Max
-        num = Diagnose.objects.aggregate(Max('register_num'))
+        num = Register.objects.aggregate(Max('register_num'))
         num = num['register_num__max'] + 1
         return render(request, 'registration/index.html', {'form': form, 'name': name,
                                                            'num': num})
