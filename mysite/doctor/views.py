@@ -52,11 +52,15 @@ def medicine_information(request):
             number = request.POST['number']
             the_diagnose = Diagnose.objects.get(register_num=number)
             the_diagnose.prescription += form.cleaned_data['药品名称'] + '!' + str(form.cleaned_data['数量']) + '#'
+            # 调整了药品余量
+            the_m = Medicine.objects.get(name=form.cleaned_data['药品名称'])
+            the_m.amount -= form.cleaned_data['数量']
+            the_m.save()
             the_diagnose.save()
             # 提取药品信息
             all_m = the_diagnose.get_medicine_list()
             addform = AddForm()
-            # 提供药品余量信息
+            # 提供药品余量信息,这里比较蠢，提供了所有的
             m = Medicine.objects.all()
             info = {}
             for i in m:
@@ -66,6 +70,7 @@ def medicine_information(request):
 
 
 def result(request):
+
     return render(request, 'doctor/result.html')
 
 
@@ -300,3 +305,6 @@ def r_index(request):
 
 def r_display(request):
     return render(request, 'registration/display.html')
+
+
+# todo：一天中查看的病人  编号自动生成 病人信息修改的界面重新做，要包含原始信息
