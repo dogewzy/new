@@ -222,7 +222,9 @@ def patient_search_day(request):
     for i in today:
         p = Patient.objects.get(p_number=i.p_number)
         person.append(p)
-    return render(request, 'polls/patient_search_day.html', {'all_person': person})
+    l = len(person)
+    return render(request, 'polls/patient_search_day.html', {'all_person': person,
+                                                             'length': l})
 
 
 def login(request):
