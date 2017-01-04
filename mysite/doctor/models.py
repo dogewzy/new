@@ -134,7 +134,7 @@ class Patient(models.Model):
     p_address = models.CharField(max_length=100, default=' ', null=True)
     p_id_num = models.CharField(max_length=100, default=' ', null=True)
 
-    def __str__(self):
-        return str(self.p_name)
+    # def __str__(self):
+    #     return str(self.p_name)
 
 

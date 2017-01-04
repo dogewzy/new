@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import permission_required
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
+import time, datetime
 
 
 login_url = "http://localhost:8000/doctor/login/"
@@ -209,6 +210,19 @@ def patient_search(request):
     else:
         form = EditForm()
         return render(request, 'polls/patient_search.html', {'form': form})
+
+
+def patient_search_day(request):
+    p = Diagnose.objects.all()
+    today = []
+    person = []
+    for i in p:
+        if i.time.date() == datetime.date.today():
+            today.append(i)
+    for i in today:
+        p = Patient.objects.get(p_number=i.p_number)
+        person.append(p)
+    return render(request, 'polls/patient_search_day.html', {'all_person': person})
 
 
 def login(request):
