@@ -168,24 +168,35 @@ def patient_log(request):
 
 def patient_num(request):
     if request.method == 'POST':
-        form = EditToBeSaveForm(request.POST)
+        form = EditForm(request.POST)
         if form.is_valid():
             num = form.cleaned_data['病人编号']
             new_p = Patient.objects.get(p_number=num)
-            if new_p:
-                new_p.p_name = form.cleaned_data['姓名']
-                new_p.p_sex = form.cleaned_data['性别']
-                new_p.p_age = form.cleaned_data['年龄']
-                new_p.p_tel_number = form.cleaned_data['电话号码']
-                new_p.save()
-                return render(request, 'polls/patient_edit.html')
-    else:
-        form = EditToBeSaveForm()
-        return render(request, 'polls/patient_num.html', {'form': form})
+            form = EditToBeSaveForm(initial={'病人编号': new_p.p_number,
+                                             '姓名': new_p.p_name,
+                                             '电话号码': new_p.p_tel_number,
+                                             '性别': new_p.p_sex,
+                                             '年龄': new_p.p_age,
+                                             })
+            return render(request, 'polls/patient_num.html', {'form': form})
 
 
 def patient_edit(request):
-    return render(request, 'polls/patient_edit.html')
+    if request.method == 'POST':
+        form = EditToBeSaveForm(request.POST)
+        if form.is_valid():
+            p = Patient.objects.get(p_number=form.cleaned_data['病人编号'])
+            p.p_name = form.cleaned_data['姓名']
+            p.p_sex = form.cleaned_data['性别']
+            p.p_tel_number = form.cleaned_data['电话号码']
+            p.p_age = form.cleaned_data['年龄']
+            p.save()
+            print(22)
+            return render(request, 'polls/message.html')
+    # 点击编辑按钮后跳到这里，在这个view中输入编号，再跳到patient_num
+    else:
+        form = EditForm()
+        return render(request, 'polls/patient_edit.html', {'form': form})
 
 
 def patient_search(request):
