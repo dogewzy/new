@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render, redirect
 from .forms import *
 from .models import *
@@ -185,7 +186,9 @@ def patient_num(request):
 def patient_edit(request):
     if request.method == 'POST':
         form = EditToBeSaveForm(request.POST)
+        print(11)
         if form.is_valid():
+            print(12)
             p = Patient.objects.get(p_number=form.cleaned_data['病人编号'])
             p.p_name = form.cleaned_data['姓名']
             p.p_sex = form.cleaned_data['性别']
@@ -237,7 +240,7 @@ def login(request):
             if user is not None:
                 auth_login(request, user)
                 print(user.user_permissions)
-                return render(request, 'polls/patient_edit.html')
+                return render(request, 'polls/index.html')
             else:
                 pass
     else:
